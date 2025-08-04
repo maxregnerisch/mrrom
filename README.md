@@ -24,9 +24,10 @@ ExtremeROM Nexus supports devices using the Exynos 9820, Exynos 990, Exynos 2100
 Any form of contribution, suggestions, bug report or feature request for the project will be welcome.
 
 # Features
-- Based on the latest stable OneUI 7 Galaxy S24 FE firmware
-- All software features from S24 FE
-- S25 Ultra CSC, ringtones and more
+- Based on the latest OneUI 8 firmware from Google Drive source
+- Enhanced build system with gdown integration
+- Removed legacy r12sxxx dependencies
+- All modern software features and optimizations
 - Moderately Debloated
 - Heavily DeKnoxed
 - Full SELinux Support

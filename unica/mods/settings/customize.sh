@@ -7,9 +7,10 @@ system/priv-app/SecSettings/SecSettings.apk/smali_classes4/com/samsung/android/s
 system/priv-app/SecSettings/SecSettings.apk/smali_classes4/com/samsung/android/settings/deviceinfo/batteryinfo/SecBatteryFirstUseDatePreferenceController.smali
 system/priv-app/SecSettings/SecSettings.apk/smali_classes4/com/samsung/android/settings/deviceinfo/batteryinfo/SecBatteryInfoFragment.smali
 "
-for f in $FTP; do
-    sed -i "s/SM-A236B/SM-S721B/g" "$APKTOOL_DIR/$f"
-done
+# Model-specific patches removed - using new Google Drive source
+# for f in $FTP; do
+#     sed -i "s/SM-A236B/SM-S721B/g" "$APKTOOL_DIR/$f"
+# done
 
 echo "Adding Multi-User Support"
 SET_PROP "system" "fw.max_users" "8"
