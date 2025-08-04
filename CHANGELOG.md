@@ -1,5 +1,12 @@
 # ExtremeROM Nexus changelog
 
+# 2.6.0
+- Switched to new Google Drive source (OneUI 8)
+- Added gdown support for firmware downloading
+- Removed all r12sxxx patches and dependencies
+- Updated to OneUI 8 base
+- Improved build system with Google Drive integration
+
 # 2.5.0
 - Switched base to S24 FE (S721BXXS6BYF5)
 - HEAVILY improved performance, general smoothness, battery and thermals

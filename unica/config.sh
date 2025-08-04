@@ -16,16 +16,16 @@
 #
 
 # UN1CA configuration file
-ROM_VERSION="2.5.1-nxt"
+ROM_VERSION="2.6.0-nxt"
 ROM_VERSION+="-$(git rev-parse --short HEAD)"
 ROM_CODENAME="Nexus"
 
 # Source ROM firmware
 case "$TARGET_SINGLE_SYSTEM_IMAGE" in
     "essi")
-        # Galaxy S24 FE (One UI 7)
-        SOURCE_CODENAME="r12s"
-        SOURCE_FIRMWARE="SM-S721B/EUX/351273090276500"
+        # New Google Drive Source (One UI 8)
+        SOURCE_CODENAME="gdrive_source"
+        SOURCE_FIRMWARE="GDRIVE/SOURCE/DOWNLOADED"
         SOURCE_EXTRA_FIRMWARES=()
         SOURCE_API_LEVEL=35
         SOURCE_PRODUCT_FIRST_API_LEVEL=34

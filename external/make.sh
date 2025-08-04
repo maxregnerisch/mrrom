@@ -140,6 +140,7 @@ mkdir -p "$TOOLS_DIR"
 ANDROID_TOOLS=true
 APKTOOL=true
 EROFS_UTILS=true
+GDOWN=true
 IMG2SDAT=true
 SAMFIRM=true
 SIGNAPK=true
@@ -163,6 +164,10 @@ EROFS_UTILS_EXEC=(
     "dump.erofs" "extract.erofs" "fsck.erofs" "fuse.erofs" "mkfs.erofs"
 )
 CHECK_TOOLS "${EROFS_UTILS_EXEC[@]}" && EROFS_UTILS=false
+GDOWN_EXEC=(
+    "gdown"
+)
+CHECK_TOOLS "${GDOWN_EXEC[@]}" && GDOWN=false
 IMG2SDAT_EXEC=(
     "blockimgdiff.py" "common.py" "images.py" "img2sdat" "rangelib.py" "sparse_img.py"
 )
@@ -231,6 +236,14 @@ if $IMG2SDAT; then
     )
 
     BUILD "img2sdat" "$SRC_DIR/external/img2sdat" "${IMG2SDAT_CMDS[@]}"
+fi
+if $GDOWN; then
+    GDOWN_CMDS=(
+        "pip3 install gdown"
+        "ln -sf \$(which gdown) \"$TOOLS_DIR/gdown\""
+    )
+
+    BUILD "gdown" "/tmp" "${GDOWN_CMDS[@]}"
 fi
 if $SAMFIRM; then
     SAMFIRM_CMDS=(

@@ -33,14 +33,28 @@ DOWNLOAD_FIRMWARE()
     PDR="$(pwd)"
 
     cd "$ODIN_DIR"
-    { samfirm -m "$MODEL" -r "$REGION" -i "$IMEI" > /dev/null; } 2>&1 \
-        && touch "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" \
-        || exit 1
-    [ -f "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" ] && {
-        echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "AP*" -exec basename {} \; | cut -d "_" -f 2)/"
-        echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "CSC*" -exec basename {} \; | cut -d "_" -f 3)/"
-        echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "CP*" -exec basename {} \; | cut -d "_" -f 2)"
-    } >> "$ODIN_DIR/${MODEL}_${REGION}/.downloaded"
+    
+    # Check if this is the new Google Drive source
+    if [[ "$MODEL" == "GDRIVE" ]]; then
+        echo "- Downloading firmware from Google Drive..."
+        mkdir -p "$ODIN_DIR/GDRIVE_SOURCE"
+        cd "$ODIN_DIR/GDRIVE_SOURCE"
+        gdown "https://drive.google.com/uc?id=1aMQSldEOfZ90_AEdAwVJNuL-AqfAJtJz" -O firmware.zip
+        unzip -q firmware.zip
+        rm firmware.zip
+        touch "$ODIN_DIR/GDRIVE_SOURCE/.downloaded"
+        echo "GDRIVE/SOURCE/DOWNLOADED" > "$ODIN_DIR/GDRIVE_SOURCE/.downloaded"
+    else
+        # Use samfirm for other firmwares
+        { samfirm -m "$MODEL" -r "$REGION" -i "$IMEI" > /dev/null; } 2>&1 \
+            && touch "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" \
+            || exit 1
+        [ -f "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" ] && {
+            echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "AP*" -exec basename {} \; | cut -d "_" -f 2)/"
+            echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "CSC*" -exec basename {} \; | cut -d "_" -f 3)/"
+            echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "CP*" -exec basename {} \; | cut -d "_" -f 2)"
+        } >> "$ODIN_DIR/${MODEL}_${REGION}/.downloaded"
+    fi
 
     echo ""
     cd "$PDR"
